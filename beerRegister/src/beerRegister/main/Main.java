@@ -10,7 +10,7 @@ public class Main {
 	static boolean exit = false;
 	static public List<Beer> beer_list = new ArrayList<Beer>();
 
-	static public void main(String[] args) throws IOException {
+	static public void main(String[] args) throws IOException, EmptyQueueException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		while (!exit) {
@@ -34,6 +34,9 @@ public class Main {
 			}
 			else if (cmd[0].equals("delete")) {
 				delete(cmd);
+			}
+			else if (cmd[0].equals("test")) {
+				test(cmd);
 			}
 			
 		}
@@ -88,5 +91,10 @@ public class Main {
 		Collections.sort(beer_list, new NameComparator());
 		int i = Collections.binarySearch(beer_list, new Beer(cmd[1], null, null), new NameComparator());
 		beer_list.remove(i);
+	}
+	
+	static public void test(String[] cmd) throws EmptyQueueException {
+		Test t = new Test();
+		t.main();
 	}
 }

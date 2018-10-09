@@ -2,7 +2,7 @@ package labor_5.main;
 
 import java.util.Objects;
 
-public class Producer extends Thread {
+public class Producer implements Runnable {
 	String my_string;
 	Fifo my_fifo;
 	int sleep_time;
@@ -23,7 +23,7 @@ public class Producer extends Thread {
 				
 				i += 1;
 				try {
-					sleep(sleep_time);
+					Thread.sleep(sleep_time);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

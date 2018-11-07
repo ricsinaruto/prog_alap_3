@@ -64,6 +64,7 @@ public class StudentData extends AbstractTableModel{
 		else if (column==3) {
 			students.get(row).setGrade((Integer)value);
 		}
+		this.fireTableDataChanged();
 	}
 
 	@Override

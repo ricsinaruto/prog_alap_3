@@ -23,3 +23,13 @@
 hs_err_pid*
 /.metadata/
 /.recommenders/
+chatbot/data/fullSource.txt
+chatbot/data/fullSourceEmb_100d.txt
+chatbot/data/fullSourceEmb_200d.txt
+chatbot/data/fullSourceEmb_300d.txt
+chatbot/data/fullSourceEmb_50d.txt
+chatbot/data/fullTarget.txt
+chatbot/data/glove_100d.txt
+chatbot/data/glove_200d.txt
+chatbot/data/glove_300d.txt
+chatbot/data/glove_50d.txt

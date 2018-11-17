@@ -1,6 +1,7 @@
 package chatbot.main;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -16,7 +17,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.TableCellRenderer;
 
 
 public class DialogFrame extends JFrame {
@@ -100,8 +103,9 @@ public class DialogFrame extends JFrame {
 		// Init table.
 		table = new JTable(tableData);
 		table.setShowGrid(false);
-		scrollpane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
+		table.setDefaultRenderer(String.class, new WordWrapCellRenderer());
+		scrollpane = new JScrollPane(table);
 		
 		center_panel = new JPanel();
 		center_panel.add(scrollpane);
@@ -115,5 +119,28 @@ public class DialogFrame extends JFrame {
 			
 			tableData.addLine(input, output);
 		}	
+	}
+	
+	public class WordWrapCellRenderer extends JTextArea implements TableCellRenderer {
+		WordWrapCellRenderer() {
+			setLineWrap(true);
+			setWrapStyleWord(true);
+		}
+
+		@Override
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			if (value!=null) {
+				setText(value.toString());
+				if (!value.toString().equals("")) {
+			        setSize(table.getColumnModel().getColumn(column).getWidth(), getPreferredSize().height);
+			        
+			        if (table.getRowHeight(row) != getPreferredSize().height) {
+			            table.setRowHeight(row, getPreferredSize().height);
+			        }
+				}
+			}
+	        return this;
+		}
+		
 	}
 }

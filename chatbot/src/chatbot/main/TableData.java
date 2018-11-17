@@ -21,6 +21,7 @@ public class TableData extends AbstractTableModel{
     public TableData() {
     	column_names.add("Chatbot Utterances");
     	column_names.add("User Utterances");
+
     	// Load data.
     	loadData();
     }

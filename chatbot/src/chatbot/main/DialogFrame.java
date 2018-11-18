@@ -10,15 +10,19 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.HashMap;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSlider;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.TableCellRenderer;
 
 
@@ -27,6 +31,7 @@ public class DialogFrame extends JFrame {
 	private JTextField text_field;
 	private JButton send_button;
 	private JComboBox<Object> combo_box;
+	private JComboBox<Object> combo_dimension;
 	private JPanel center_panel;
 	private JTable table;
 	private JScrollPane scrollpane;
@@ -53,10 +58,14 @@ public class DialogFrame extends JFrame {
 		// Initialize frame.
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("TalkToMe");
-		setSize(new Dimension(1000, 800));
+		setSize(new Dimension(1280, 720));
 		setResizable(true);
 		
 		// Initialize components.
+		JLabel type_here = new JLabel("Type your input here:");
+		JLabel bot_type_label = new JLabel("Select a chatbot type:");
+		JLabel dimension_label = new JLabel("Choose number of dimensions for sentence vector:");
+		JLabel data_slider = new JLabel("How much data to use:");
 		text_field = new JTextField(50);
 		send_button = new JButton();
 		send_button.setText("Send!");
@@ -74,19 +83,41 @@ public class DialogFrame extends JFrame {
 		
 		// Create upper panel.
 		JPanel upper_panel = new JPanel();
+		upper_panel.add(bot_type_label);
 		upper_panel.add(combo_box);
 		
 		// Create left panel. (sliders)
 		JPanel left_panel = new JPanel();
+		// Create combobox for dimension selection.
+		Object[] dimensions = new Object[4];
+		dimensions[0] = 50;
+		dimensions[1] = 100;
+		dimensions[2] = 200;
+		dimensions[3] = 300;
+		combo_dimension = new JComboBox<Object>(dimensions);
+		combo_dimension.addActionListener(new comboListener());
+		left_panel.add(dimension_label);
+		left_panel.add(combo_dimension);
+		
+		
 		
 		// Create center panel. (conversation)
 		initCenterPanel();
 		
-		// Create right panel. (maybe image)
+		// Create right panel.
 		JPanel right_panel = new JPanel();
+		// Create data slider.
+		JSlider slider = new JSlider(JSlider.HORIZONTAL, 10, data.source_lines.size(), 5000);
+		slider.addChangeListener(new SliderListener());
+		slider.setMajorTickSpacing(20000);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
+		right_panel.add(data_slider);
+		right_panel.add(slider);
 		
 		// Create lower panel. (text field and button)
 		JPanel lower_panel = new JPanel();
+		lower_panel.add(type_here);
 		lower_panel.add(text_field);
 		lower_panel.add(send_button);
 		
@@ -109,6 +140,22 @@ public class DialogFrame extends JFrame {
 		
 		center_panel = new JPanel();
 		center_panel.add(scrollpane);
+	}
+	
+	public class SliderListener implements ChangeListener {
+		@Override
+		public void stateChanged(ChangeEvent arg0) {
+			JSlider slid = (JSlider)arg0.getSource();
+			botType.get(combo_box.getSelectedItem()).setDataCoverage((int)slid.getValue());
+			
+		}
+	}
+	
+	public class comboListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			botType.get(combo_box.getSelectedItem()).setEmbDimension((int)combo_dimension.getSelectedItem());
+		}
 	}
 	
 	public class SendButtonActionListener implements ActionListener {

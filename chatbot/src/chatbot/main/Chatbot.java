@@ -1,8 +1,19 @@
 package chatbot.main;
 
 public abstract class Chatbot {
+	protected int embDimension = 300;
+	protected int dataCoverage;
+	
 	public Chatbot() {
 		
+	}
+	
+	public void setEmbDimension(int embDimension) {
+		this.embDimension = embDimension;
+	}
+	
+	public void setDataCoverage(int dataCoverage) {
+		this.dataCoverage = dataCoverage;
 	}
 	
 	public String act(String input) {

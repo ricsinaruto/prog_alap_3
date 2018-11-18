@@ -7,7 +7,6 @@ import chatbot.main.Data.Vector;
 
 
 public class EmbeddingChatbot extends StringChatbot {
-	private int embDimension = 300;
 	public EmbeddingChatbot(Data data, JokeChatbot jokeBot) {
 		this.data = data;
 		this.jokeBot = jokeBot;
@@ -20,10 +19,6 @@ public class EmbeddingChatbot extends StringChatbot {
 		jokeWords.add("gag");
 		
 
-	}
-	
-	public void setEmbDimension(int embDimension) {
-		this.embDimension = embDimension;
 	}
 	
 	public String getOutput(String input) {

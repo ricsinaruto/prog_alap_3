@@ -13,8 +13,6 @@ public class StringChatbot extends Chatbot {
 	
 	private List<Counter<String>> source_counts = new ArrayList<Counter<String>>();
 	
-	protected int dataCoverage;
-	
 	public StringChatbot() {}
 	
 	public StringChatbot(Data data, JokeChatbot jokeBot) {
@@ -31,10 +29,6 @@ public class StringChatbot extends Chatbot {
 		
 		// Build word counts.
 		buildWordCounts();
-	}
-	
-	public void setDataCoverage(int dataCoverage) {
-		this.dataCoverage = dataCoverage;
 	}
 	
 	public void buildWordCounts() {

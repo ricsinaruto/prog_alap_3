@@ -133,11 +133,18 @@ public class Data {
 		}
 		
 		public float cosine(Vector other) {
-			return (float)(dot_product(this, other)/Math.sqrt(dot_product(this, this))/Math.sqrt(dot_product(other, other)));
+			float this_length = (float) Math.sqrt(dot_product(this, this));
+			float other_length = (float) Math.sqrt(dot_product(other, other));
+			
+			// Check for 0 divisor.
+			if (this_length == 0 || other_length == 0) {
+				throw new ArithmeticException();
+			}
+			return dot_product(this, other)/this_length/other_length;
 		}
 		
 		public float dot_product(Vector first, Vector second) {
-			int output = 0;
+			float output = 0;
 			for (int i = 0; i < first.values.length; i++) {
 				output += first.values[i] * second.values[i];
 			}

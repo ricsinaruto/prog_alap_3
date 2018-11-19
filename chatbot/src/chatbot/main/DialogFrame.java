@@ -37,21 +37,17 @@ public class DialogFrame extends JFrame {
 	private JScrollPane scrollpane;
 	
 	// References to the different components.
-	private Data data;
 	private TableData tableData;
 	private StringChatbot stringBot;
 	private EmbeddingChatbot embeddingBot;
-	private JokeChatbot jokeBot;
 	
 	// Dictionary for chatbot types.
 	private HashMap<String, Chatbot> botType;
 	
 	public DialogFrame(Data data, StringChatbot strBot, EmbeddingChatbot embBot, JokeChatbot jokeBot) {
 		// Store references.
-		this.data = data;
 		this.stringBot = strBot;
 		this.embeddingBot = embBot;
-		this.jokeBot = jokeBot;
 		botType = new HashMap<String, Chatbot>();
 		tableData = new TableData();
 		

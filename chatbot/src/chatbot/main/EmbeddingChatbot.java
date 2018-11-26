@@ -44,9 +44,14 @@ public class EmbeddingChatbot extends StringChatbot {
 		float largest_cos = -1;
 		int index = 0;
 		// Loop through data set, and find closest source utterance.
+		// Loop through data set, and find closest source utterance.
 		for (int i = 0; i < dataCoverage; i++) {
-			float current_cos = sum_vector.cosine(data.source_embeddings.get(embDimension).get(i));
-			
+			float current_cos = -1;
+			try {
+				current_cos = sum_vector.cosine(data.source_embeddings.get(embDimension).get(i));
+			}
+			catch (ArithmeticException e) {
+			}
 			if (current_cos > largest_cos) {
 				largest_cos = current_cos;
 				index = i;

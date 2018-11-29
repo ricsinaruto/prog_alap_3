@@ -28,7 +28,7 @@ public abstract class Chatbot {
 	
 	public String preprocess(String input) {
 		input = input.toLowerCase();
-		input = input.replaceAll("[^a-z .?!'0-9]", "");
+		//input = input.replaceAll("[^a-z .?!'0-9]", "");
 		input = input.replaceAll("[.]", " . ");
 		input = input.replaceAll("[?]", " ? ");
 		input = input.replaceAll("[!]", " ! ");

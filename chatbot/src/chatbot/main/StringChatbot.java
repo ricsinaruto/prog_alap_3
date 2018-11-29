@@ -67,11 +67,13 @@ public class StringChatbot extends Chatbot {
 				current_sum += Math.abs(inp_counter.count(word) - source_counts.get(i).count(word));
 			}
 			
-			if (current_sum < smallest_sum) {
-				smallest_sum = current_sum;
-				index = i;
+			if (!data.source_lines.get(i)[0].equals("")) {
+				if (current_sum < smallest_sum && !data.target_lines.get(i).equals("")) {
+					smallest_sum = current_sum;
+					index = i;
+				}	
 			}
-			if (current_sum == 0) return data.target_lines.get(i);
+			if (current_sum == 0 && !data.target_lines.get(i).equals("")) return data.target_lines.get(i);
 		}
 		
 		return data.target_lines.get(index);

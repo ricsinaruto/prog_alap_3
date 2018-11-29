@@ -103,7 +103,7 @@ public class DialogFrame extends JFrame {
 		// Create right panel.
 		JPanel right_panel = new JPanel();
 		// Create data slider.
-		JSlider slider = new JSlider(JSlider.HORIZONTAL, 10, data.source_lines.size(), 5000);
+		JSlider slider = new JSlider(JSlider.HORIZONTAL, 10, data.source_lines.size(), 1000);
 		slider.addChangeListener(new SliderListener());
 		slider.setMajorTickSpacing(20000);
 		slider.setPaintTicks(true);

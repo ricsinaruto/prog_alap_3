@@ -33,3 +33,7 @@ chatbot/data/glove_100d.txt
 chatbot/data/glove_200d.txt
 chatbot/data/glove_300d.txt
 chatbot/data/glove_50d.txt
+chatbot/data/fullSource_eve.txt
+chatbot/data/fullSourcetrue.txt
+chatbot/data/fullTarget_eve.txt
+chatbot/data/fullTargettrue.txt
